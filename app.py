@@ -4,7 +4,7 @@ import json
 
 
 app = Flask(__name__)   # create an object app
-# init_db()
+init_db()
 
 @app.route("/users", methods=["GET","POST"]) 
 def handle_users():
@@ -12,10 +12,8 @@ def handle_users():
         return get_all_users(), 200
     
     if request.method == "POST":
-        userJson = request.get_json()
-        print(userJson)
-        user = json.loads(userJson) 
-        print(user)
-        # add_user(user)
-        return 201   
+        jsonString = request.get_json()
+        userJson = json.loads(jsonString) 
+        add_user(userJson)
+        return json.dumps({"message":"user created"}), 201   
     

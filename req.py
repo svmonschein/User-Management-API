@@ -28,9 +28,9 @@ if __name__ == "__main__":
     api_url = "http://127.0.0.1:5000/users"
     method = "POST"
     data = {
-        "username": "sven",
-        "email": "sven@test.de",
-        "is_blocked": "0"
+        "username": "Spiro",
+        "email": "Spiro@test.de",
+        "is_blocked": 0
     }
 
     send_http_request(api_url, method=method, payload=data)

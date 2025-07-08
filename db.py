@@ -12,8 +12,8 @@ def init_db() -> None:
                 CREATE TABLE IF NOT EXISTS user(
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     username text NOT NULL,
-                    email text NOT NULL
-                    is_blocked INTEGER,
+                    email text NOT NULL,
+                    is_blocked INTEGER
                 )""")
     # saves changes
     con.commit()
@@ -78,6 +78,25 @@ def get_user_by_id(id: int) -> list[Any]:
     con.close()
 
     return results
+
+def del_user_by_id(id: int) -> None:
+    # connect a database, if it not present the database will be created
+    con = sqlite3.connect("user.db") 
+
+    # create the cursor needed to execute sql statements
+    cur = con.cursor()
+
+    # GET all users
+    cur.execute("""
+                DELETE
+                FROM user 
+                WHERE id = ?
+                """,(id)) 
+    
+    results = cur.fetchall()
+
+    # closes conection to database
+    con.close()
 
 
 
